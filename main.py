@@ -1,10 +1,10 @@
-# api.py - NEXUS V11 API for Render (24x7)
+# main.py - NEXUS V11 API for Render (24x7) - FIXED
 from fastapi import FastAPI
 from fastapi.responses import JSONResponse
 import os
 
-# Tera wala engine import ho raha hai
-from nexus_v11 import NexusEngineV11
+# FIX: tere file ka naam pro.py hai, isliye pro se import
+from pro import NexusEngineV11
 
 app = FastAPI(
     title="NEXUS V11 API",
@@ -21,7 +21,7 @@ print("NEXUS V11 API Engine Started on Render")
 def root():
     return {
         "status": "NEXUS V11 LIVE 🔥",
-        "owner": "Abhishek  pal",
+        "owner": "Abhishek pal",
         "engine": "V11 PRO MIXTURE",
         "features": "mmap Zero-Copy + LRU + 16x 2-bit + Swarm Hash",
         "ram": "400MB (Render Free)",
