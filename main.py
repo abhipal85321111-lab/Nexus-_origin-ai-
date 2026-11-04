@@ -63,3 +63,20 @@ def stats():
         "swarm_nodes": engine.swarm_nodes,
         "phone_ram_config": f"{engine.phone_ram_mb}MB"
     }
+
+# main.py me ye add kar de /stats ke neeche
+
+from fastapi import Request
+
+shard_storage = {}  # RAM me temporary
+
+@app.post("/upload_shard/{shard_id}")
+async def upload_shard(shard_id: str, request: Request):
+    data = await request.json()
+    shard_storage[shard_id] = data
+    # Yahan tera API shard ko save kar lega, Colab ki RAM khali ho jayegi
+    return {"status": "saved", "shard_id": shard_id, "saved_ram": f"{len(str(data))} bytes", "total_shards": len(shard_storage)}
+
+@app.get("/list_shards")
+def list_shards():
+    return {"total": len(shard_storage), "shards": list(shard_storage.keys())}
